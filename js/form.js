@@ -6,6 +6,12 @@ botao.addEventListener('click',function(){
     let formulario = document.querySelector('#form-aluno') // pegando tds os objs do form
     let dadosAluno = novoAluno(formulario)
 
+    console.log(dadosAluno.Jnome)
+    console.log(dadosAluno.JN1.toFixed(1))
+    console.log(dadosAluno.JN2.toFixed(1))
+    console.log(dadosAluno.JN3.toFixed(1))
+    console.log(dadosAluno.JMediaFinal.toFixed(1))
+    console.log(dadosAluno.JSituacao)
 })
 
             //VERIFICAÇÕES
@@ -77,6 +83,25 @@ function novoAluno (meuform){
         alert ("O campo deve ser preenchido por valores entre 0 e 10")
         meuform.querySelector('#n3').value = ""
         meuform.querySelector('#n3').focus()
+    }
+
+    else{
+        let jsonAluno = {
+            Jnome: meuform.querySelector('#nome').value,
+            JN1: meuform.querySelector('#n1').value,
+            JN2: meuform.querySelector('#n2').value,
+            JN3: meuform.querySelector('#n3').value, 
+
+            JMediaFinal: calcularMedia(meuform.querySelector('#n1').value.replace(",","."),
+            meuform.querySelector('#n2').value.replace(",","."),
+            meuform.querySelector('#n3').value.replace(",",".")),
+            
+            JSituacao: MostrarSituacao(calcularMedia(meuform.querySelector('#n1').value.replace(",","."),
+            meuform.querySelector('#n2').value.replace(",","."),
+            meuform.querySelector('#n3').value.replace(",",".")))[0]    
+
+        }
+        return jsonAluno
     }
 
 }
